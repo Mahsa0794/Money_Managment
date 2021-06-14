@@ -8,14 +8,14 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavitionBar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="70dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="671dp"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/edittext_backgroung"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
+        android:layout_marginTop="716dp"
+        android:layout_marginBottom="0dp"
+        android:background="@color/purple_500"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
         app:menu="@menu/bottommenu">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>

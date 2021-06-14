@@ -24,9 +24,9 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-
-
-
-    <include layout="@layout/content"></include>
+    <include
+        layout="@layout/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></include>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
