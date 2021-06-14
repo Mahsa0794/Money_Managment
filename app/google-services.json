@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "724371162794",
+    "project_id": "money-d1119",
+    "storage_bucket": "money-d1119.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:724371162794:android:f9e82b87b27ec1f4bf32d3",
+        "android_client_info": {
+          "package_name": "com.example.money"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "724371162794-evpe76rtrsh1qj8lria9q97uighiucsg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD44uKi3aGPAESV2F3uBWYvk1qkQMiPglc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "724371162794-evpe76rtrsh1qj8lria9q97uighiucsg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

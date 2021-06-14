@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Money">
-        <activity android:name=".ResetActivity"></activity>
+        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".ResetActivity" />
         <activity android:name=".RegistrationsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

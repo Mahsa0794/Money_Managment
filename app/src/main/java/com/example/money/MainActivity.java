@@ -1,8 +1,10 @@
 package com.example.money;
 
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,6 +12,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
     private EditText mEmail;
@@ -17,10 +25,21 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLoin;
     private TextView mForgetPassword;
     private TextView mSignUpHere;
+
+    private ProgressDialog mDialog;
+
+    //Firebase...
+
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAuth=FirebaseAuth.getInstance();
+
+        mDialog = new ProgressDialog(this);
 
         loginDetails();
 
@@ -51,6 +70,32 @@ public class MainActivity extends AppCompatActivity {
                     mPass.setError("Password Required..");
                     return;
                 }
+                mDialog.setMessage("Proccessing...");
+                mDialog.show();
+
+                mAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if (task.isSuccessful()){
+
+                            mDialog.dismiss();
+
+                            Toast.makeText(getApplicationContext(),"Login Successful.",Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(MainActivity.this,
+                                    HomeActivity.class);
+                            startActivity(intent);
+
+                        }
+                        else
+                        {
+
+                            mDialog.dismiss();
+
+                            Toast.makeText(getApplicationContext(),"Login Failed",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
             }
         });
