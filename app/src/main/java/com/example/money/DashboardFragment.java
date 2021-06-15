@@ -16,6 +16,9 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +47,9 @@ public class DashboardFragment extends Fragment {
     private Animation FadeOpen,fadeClose;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference mIncomeDatabase;
+    private DatabaseReference mExpenseDatabase;
+
 
 
     /**
@@ -78,6 +84,14 @@ public class DashboardFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View myview= inflater.inflate(R.layout.fragment_dashboard, container, false);
+
+        mAuth=FirebaseAuth.getInstance();
+        FirebaseUser mUser=mAuth.getCurrentUser();
+        String uid= mUser.getUid();
+
+        mIncomeDatabase= FirebaseDatabase.getInstance().getReference().child("IncomeData").child(uid);
+        mIncomeDatabase= FirebaseDatabase.getInstance().getReference().child("ExpenseData").child(uid);
+
 
         fab_main=myview.findViewById(R.id.fb_main_plus_btn);
         fab_income_btn=myview.findViewById(R.id.income_ft_btn);
@@ -155,10 +169,10 @@ public class DashboardFragment extends Fragment {
 
         mydialog.setView(myview);
 
-        AlertDialog dialog=mydialog.create();
-        EditText editAmount= myview.findViewById(R.id.amount_edt);
-        EditText editType= myview.findViewById(R.id.type_edt);
-        EditText editNote= myview.findViewById(R.id.note_edt);
+        final AlertDialog dialog=mydialog.create();
+        final EditText editAmount= myview.findViewById(R.id.amount_edt);
+        final EditText editType= myview.findViewById(R.id.type_edt);
+        final EditText editNote= myview.findViewById(R.id.note_edt);
 
         Button btnSave=myview.findViewById(R.id.btnSave);
         Button btnCacel=myview.findViewById(R.id.btnCancel);
@@ -179,6 +193,8 @@ public class DashboardFragment extends Fragment {
                     return;
                 }
                 int ourammountint=Integer.parseInt(ammount);
+
+
             }
         });
 
@@ -186,10 +202,42 @@ public class DashboardFragment extends Fragment {
         btnCacel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+
+    }
+
+
+    public void expenseDataInsert(){
+
+        AlertDialog.Builder mydialog=new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater=LayoutInflater.from(getActivity());
+
+        View myview = inflater.inflate(R.layout.custom_layout_for_insert_data,null);
+        mydialog.setView(myview);
+
+        AlertDialog dialog=mydialog.create();
+
+        EditText ammount=myview.findViewById(R.id.amount_edt);
+        final EditText Type= myview.findViewById(R.id.type_edt);
+        final EditText Note= myview.findViewById(R.id.note_edt);
+
+        Button btnSave=myview.findViewById(R.id.btnSave);
+        Button btnCacel=myview.findViewById(R.id.btnCancel);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
 
             }
         });
 
-
     }
+
 }
